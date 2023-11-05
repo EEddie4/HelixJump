@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public int currentStage = 0;
     public static GameManager singleton;
+
+    public PlayfabManager playfabManager;
     public AudioSource winLevel;
     public AudioSource deathSound;
     void Awake()
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
         }
         
         best = PlayerPrefs.GetInt("Highscore");
+        
     }
 
     // Update is called once per frame
@@ -54,6 +57,7 @@ public class GameManager : MonoBehaviour
         {
             best = score;
             PlayerPrefs.SetInt("Highscore", score);
+            playfabManager.SendLeaderboard(score);
         }
     }
 }
